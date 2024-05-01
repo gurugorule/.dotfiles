@@ -1,0 +1,3 @@
+- Nothing special complete Neovim configuration in from NVCHAD 
+- [Nvchad Docs](https://nvchad.com/)
+- [Install NVCHAD](https://nvchad.com/docs/quickstart/install)
