@@ -1,6 +1,6 @@
 - Use NvChad 
-- [NvChad Docs](https://nvchad.com/)
-- [Install NvChad](https://nvchad.com/docs/quickstart/install)
+  - [NvChad Docs](https://nvchad.com/)
+  - [Install NvChad](https://nvchad.com/docs/quickstart/install)
 
 - post intall 
 ```bash 
