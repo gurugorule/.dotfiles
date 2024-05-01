@@ -1,6 +1,6 @@
 [user]
-	name = Gurunath Gorule
-	email = goruleguru@gmail.com
+	name = "Your Name" 
+	email = "Your@mail.com
 [core]
   editor = nvim
 
