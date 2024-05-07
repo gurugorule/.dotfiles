@@ -3,5 +3,5 @@ clone the repo in Home directory "~"
 ```
 
 > [!WARNING]
-> this repo is still under developement. 
+> this repo is still under developement. Only For MacOS/Linux!
 
