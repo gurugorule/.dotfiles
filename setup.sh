@@ -1,21 +1,15 @@
 #!/bin/bash
 
+file_one=~/.dotfiles/.config/nvim/chadrc.lua
+file_two=~/.config/nvim/lua/chadrc.lua
 
-nvim_file_path = ~/.config/nvim
-rm_chadrc_file = rm ~/.config/nvim/lua/custom/chadrc.lua
-
-if [ -d $nvim_file_path]; then
-  $rm_chadrc_file
+# Check if both files exist
+if [ -e "$file_one" ] && [ -e "$file_two" ]; then
+    # Copy the content of file 1 to file 2, overwriting file 2
+    cp "$file_one" "$file_two"
+    echo "Content copied and overwritten successfully."
 else
-  echo "NvChad not found, Installing NvChad..."
-  git clone https://github.com/NvChad/starter ~/.config/nvim 
-  $rm_chadrc_file
+    echo "One or both files do not exist."
+fi
 
-cp ./.config/nvim/chadrc.lua ~/.config/nvim/lua/custom/ 
-
-
-cp ./.config/tmux ~/.config/ 
-
-# install all nvim plugin 
-nvim 
-
+cp -r ~/.dotfiles/.config/tmux ~/.config 
