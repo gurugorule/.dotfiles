@@ -10,6 +10,7 @@ alias l='ls -CF'
 alias vim='nvim'
 alias cls='clear'
 alias tmx='tmux -u'
+alias rmrf='rm -rf'
 
 if [ -n "$TMUX" ]; then
     export PS1=$my_tmux_prompt
