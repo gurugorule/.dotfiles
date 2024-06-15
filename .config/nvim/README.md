@@ -4,7 +4,7 @@
 
 - post intall 
 ```bash 
-rm ~/.config/nvim/lua/custom/chadrc.lua 
-mv chadrc.lua ~/.config/nvim/lua/custom/chadrc.lua 
+rm -rf ~/.config/nvim/lua/custom 
+cp -r ./custom ~/.config/nvim/lua/
 
 ```

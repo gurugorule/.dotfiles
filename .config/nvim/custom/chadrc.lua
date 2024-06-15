@@ -4,10 +4,9 @@ local M = {}
 M.ui = {
   theme = 'catppuccin',
   transparency = true,
-  
-  nvdash = {
-    load_on_startup = true,
-  }
 }
+M.plugins = "custom.plugins"
+vim.opt.relativenumber = true
+vim.opt.number = true
 
 return M
