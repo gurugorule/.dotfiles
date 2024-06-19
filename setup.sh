@@ -27,6 +27,7 @@ check_command() {
 # Check if tmux and neovim are installed
 check_command tmux
 check_command nvim
+check_command kitty
 
 rm -rf ~/.config/nvim/lua/custom 
 
