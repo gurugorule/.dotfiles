@@ -31,5 +31,6 @@ check_command kitty
 
 rm -rf ~/.config/nvim/lua/custom 
 
-cp -r ./custom ~/.config/nvim/lua/
-cp -r ~/.dotfiles/.config/tmux ~/.config 
+cp -r ./.config/nvim/custom ~/.config/nvim/lua/
+cp -r ./.config/tmux ~/.config 
+cp -r ./.config/kitty/kitty.conf ~/.config/kitty
