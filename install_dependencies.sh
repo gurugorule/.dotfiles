@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# Function to update apt pkg repo 
 update_pkg(){
   echo "Updating apt pkg repo.."
   echo ""
   sudo apt update 
 }
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" &> /dev/null
@@ -23,6 +25,8 @@ install_tool() {
         eval "$install_command"
     fi
 }
+
+# Update apt pkg repo
 update_pkg
 
 # Install Neovim
@@ -44,5 +48,7 @@ install_tool "kitty" "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh 
 && sed -i 's|Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g' ~/.local/share/applications/kitty*.desktop
 && echo 'kitty.desktop' > ~/.config/xdg-terminals.list "
 
-echo "Installation complete."
-
+echo ""
+echo "###########################"
+echo "#  Installation complete  #"
+echo "###########################"
