@@ -43,5 +43,24 @@
 # echo "guru"
 
 # echo -e "Hello\ngurunath"
- echo -e "$1 is not installed :) first install dependencies.. (\`run install_dependencies.sh\`) then re-run the script \nExiting."
+# a=tmux
+error() { echo -e "ERROR \n$*"; exit 1; }
+# error "$a is not installed :) first install dependencies.. (\`run install_dependencies.sh\`) then re-run the script \nExiting."
 
+#!/bin/bash
+
+# Ping Google's public DNS server
+# ping -c 1 8.8.8.8 &> /dev/null
+#
+# # Check the exit status of the ping command
+# if [ $? -ne 0 ]; then
+#     echo "No internet connection."
+# else
+#     echo "Internet connection is available."
+# fi
+ping -c 1 8.8.8.8 &> /dev/null
+# Check the exit status of the ping command
+if [ $? -ne 0 ]; then
+    error "No internet connection. \nPlease Connect to Internet"
+    exit 1
+fi
