@@ -1,10 +1,27 @@
 #!/bin/bash
 
+show_spinner() {
+    local pid=$1
+    local delay=0.1
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep -w $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
+
 # Function to update apt pkg repo 
 update_pkg(){
-  echo "Updating apt pkg repo.."
-  echo ""
-  sudo apt update 
+  echo "Apt Package Repository is updating..."
+  sudo apt update
+  pid=$!
+  show_spinner $pid
+  echo "Update complete!"
+
 }
 
 # Function to check if a command exists
