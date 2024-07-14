@@ -81,20 +81,70 @@ error() { echo -e "ERROR \n$*"; exit 1; }
 #!/bin/bash
 
 # Function to show a spinner
-show_spinner() {
-    local pid=$1
-    local delay=0.1
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep -w $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-}
+# show_spinner() {
+#     local pid=$1
+#     local delay=0.1
+#     local spinstr='|/-\'
+#     while [ "$(ps a | awk '{print $1}' | grep -w $pid)" ]; do
+#         local temp=${spinstr#?}
+#         printf " [%c]  " "$spinstr"
+#         local spinstr=$temp${spinstr%"$temp"}
+#         sleep $delay
+#         printf "\b\b\b\b\b\b"
+#     done
+#     printf "    \b\b\b\b"
+# }
+#
+# # Print custom message
+# echo "Program is updating..."
+#
+# # Update package repository and suppress the output
+# sudo apt update > /dev/null 2>&1 &
+#
+# # Get the PID of the background process
+# pid=$!
+# show_spinner $pid
+#
+# echo "Update complete!"
 
+#!/bin/bash
+
+# Function to show a progress bar
+
+show_progress() {
+    local pid=$1
+    local duration=$2
+    local interval=1
+    local progress=0
+
+    while [ "$(ps -p $pid -o pid=)" ]; do
+        sleep $interval
+        progress=$((progress + interval))
+        percentage=$((100 * progress / duration))
+        if [ $percentage -gt 100 ]; then
+            percentage=100
+        fi
+
+        printf "\r["
+        for ((i=0; i<percentage; i+=2)); do
+            printf "#"
+        done
+        for ((i=percentage; i<100; i+=2)); do
+            printf " "
+        done
+        printf "] %d%%" "$percentage"
+    done
+
+    if [ $percentage -lt 100 ]; then
+        percentage=100
+        printf "\r["
+        for ((i=0; i<percentage; i+=2)); do
+            printf "#"
+        done
+        printf "] %d%%" "$percentage"
+    fi
+    printf "\n"
+}
 # Print custom message
 echo "Program is updating..."
 
@@ -103,7 +153,9 @@ sudo apt update > /dev/null 2>&1 &
 
 # Get the PID of the background process
 pid=$!
-show_spinner $pid
+
+# Show progress bar for approximately 30 seconds
+show_progress $pid 30
 
 echo "Update complete!"
 
