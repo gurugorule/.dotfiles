@@ -58,9 +58,52 @@ error() { echo -e "ERROR \n$*"; exit 1; }
 # else
 #     echo "Internet connection is available."
 # fi
-ping -c 1 8.8.8.8 &> /dev/null
-# Check the exit status of the ping command
-if [ $? -ne 0 ]; then
-    error "No internet connection. \nPlease Connect to Internet"
-    exit 1
-fi
+# ping -c 1 8.8.8.8 &> /dev/null
+# # Check the exit status of the ping command
+# if [ $? -ne 0 ]; then
+#     error "No internet connection. \nPlease Connect to Internet"
+#     exit 1
+# fi
+
+# update_pkg_repo(){
+#   if [ "$(id -u)" -eq 0 ]; then
+#     echo "apt pkg updating..."
+#     apt update > /dev/null 2>&1
+#
+#   else 
+#     error "This script requires superuser permissions. \nPlease re-run as root."
+#     exit 1
+#   fi
+# }
+#
+# update_pkg_repo 
+
+#!/bin/bash
+
+# Function to show a spinner
+show_spinner() {
+    local pid=$1
+    local delay=0.1
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep -w $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
+
+# Print custom message
+echo "Program is updating..."
+
+# Update package repository and suppress the output
+sudo apt update > /dev/null 2>&1 &
+
+# Get the PID of the background process
+pid=$!
+show_spinner $pid
+
+echo "Update complete!"
+
