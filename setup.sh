@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #ERROR Fucntion 
-error() { echo -e "ERROR \n$*"; exit 1; }
+error() { echo -e "\033[0;31m \rERROR \033[0m \n$*"; exit 1; }
 
 # Function to show a spinner
 show_spinner() {
@@ -45,8 +45,8 @@ update_pkg_repo(){
 # function to check if command found. 
 check_command() {
     if ! command -v "$1" >/dev/null 2>&1; then
-      error "$1 is not installed :) first install dependencies.. (\`run install_dependencies.sh\`) then re-run the script \nExiting."
-      exit 1
+      error "$1 is not installed \n installing $1..."
+      ./install_dependencies.sh 
     fi
 }
 
